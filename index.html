@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZENVY STORE — Kho Acc Game &amp; File Chất Lượng</title>
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0e1627;
+      --surface-2: #142038;
+      --border: rgba(148, 163, 184, 0.16);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 16px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.14), transparent 36%),
+        radial-gradient(circle at 88% 14%, rgba(129, 140, 248, 0.14), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+
+    .container {
+      width: min(1260px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 11, 20, 0.82);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 72px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #04101f;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.28);
+    }
+
+    .brand strong { display: block; font-size: 1.05rem; letter-spacing: 0.4px; }
+    .brand span { display: block; font-size: 0.78rem; color: var(--muted); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--text); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #04101f;
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.06); }
+
+    .btn-ghost {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover { background: var(--surface-2); }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.16);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    main { padding: 28px 0 72px; }
+
+    .layout-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-col { display: flex; flex-direction: column; gap: 28px; }
+
+    .hero {
+      background: linear-gradient(160deg, rgba(20, 32, 56, 0.9), rgba(14, 22, 39, 0.95));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      color: #7dd3fc;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.65rem, 3.2vw, 2.45rem);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: rgba(7, 11, 20, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .stat-card span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .panel-head h2 { font-size: 1.3rem; }
+    .panel-head p { color: var(--muted); font-size: 0.88rem; }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tab-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: 0.15s ease;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: rgba(56, 189, 248, 0.45);
+      color: var(--text);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .product-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #080d18;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+
+    .product-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
+    }
+
+    .product-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .cat-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(129, 140, 248, 0.16);
+      color: #c7d2fe;
+      font-weight: 600;
+    }
+
+    .product-title { font-size: 1.02rem; font-weight: 700; }
+    .product-desc { font-size: 0.85rem; color: var(--muted); }
+
+    .product-price {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+
+    .product-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+      font-size: 0.85rem;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface-2);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .mini-thumb {
+      width: 48px;
+      height: 34px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .status-ok {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(34, 197, 94, 0.16);
+      color: #86efac;
+    }
+
+    aside.qr-sidebar {
+      position: sticky;
+      top: 92px;
+    }
+
+    .qr-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .qr-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .qr-head h2 { font-size: 1.15rem; }
+    .qr-head span {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #86efac;
+    }
+
+    .qr-box {
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .qr-box img {
+      width: 210px;
+      height: 210px;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px;
+      border-radius: 10px;
+    }
+
+    .bank-info {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.86rem;
+    }
+
+    .bank-info > div {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .bank-info span { color: var(--muted); }
+
+    .steps-box {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.84rem;
+    }
+
+    .steps-box ol {
+      padding-left: 18px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--muted);
+    }
+
+    .qr-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bot-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 45;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #04101f;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+    }
+
+    .bot-drawer {
+      position: fixed;
+      right: 20px;
+      bottom: 76px;
+      width: min(360px, calc(100% - 32px));
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      z-index: 45;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .bot-drawer.open { display: flex; }
+
+    .bot-top {
+      padding: 14px 16px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .bot-top strong { display: block; font-size: 0.95rem; }
+    .bot-top span { font-size: 0.76rem; color: #86efac; }
+
+    .bot-messages {
+      padding: 14px;
+      max-height: 250px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .msg {
+      padding: 9px 12px;
+      border-radius: 12px;
+      max-width: 88%;
+      white-space: pre-line;
+    }
+
+    .msg.bot {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+    }
+
+    .msg.user {
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      align-self: flex-end;
+    }
+
+    .bot-quick {
+      padding: 0 14px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .bot-quick button {
+      font-size: 0.75rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .bot-form {
+      display: flex;
+      gap: 8px;
+      padding: 10px 14px 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .bot-form input {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 14, 0.76);
+      backdrop-filter: blur(6px);
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal-box {
+      width: min(560px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-box.wide { width: min(860px, 100%); }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .img-preview-box {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .img-preview-box img {
+      width: 112px;
+      height: 76px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 980px) {
+      .layout-grid { grid-template-columns: 1fr; }
+      aside.qr-sidebar { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <div class="brand-logo">ZV</div>
+        <div>
+          <strong>ZENVY STORE</strong>
+          <span>Acc Free Fire • Acc Liên Quân • File / Config</span>
+        </div>
+      </a>
+
+      <nav aria-label="Điều hướng chính">
+        <a href="#catalog">Danh mục</a>
+        <a href="#catalog">Sản phẩm</a>
+        <a href="#history">Lịch sử giao dịch</a>
+        <a href="#qr-support">Hỗ trợ &amp; QR</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="https://zalo.me/0366195864" target="_blank" rel="noopener">Zalo Hỗ Trợ</a>
+        <button class="btn btn-primary" type="button" id="openAdminBtn">Quản trị Admin</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container layout-grid">
+      <div class="main-col">
+        <section class="hero">
+          <div class="badges">
+            <span class="badge">ACC FREE FIRE</span>
+            <span class="badge">ACC LIÊN QUÂN</span>
+            <span class="badge">FILE / CONFIG</span>
+            <span class="badge">TỰ XÉT DUYỆT &amp; GIAO NGAY</span>
+          </div>
+
+          <h1>Kho Acc Game &amp; File Chất Lượng tại <span>ZENVY STORE</span></h1>
+          <p>
+            Hệ thống cung cấp Acc Free Fire, Acc Liên Quân, File / Config và Genshin Impact.
+            Quét mã QR chuyển khoản đúng nội dung, bấm xác nhận để hệ thống tự xét duyệt, giao thông tin ngay và lưu lịch sử giao dịch.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#catalog">Khám phá sản phẩm ngay</a>
+            <a class="btn btn-ghost" href="#history">Xem lịch sử giao dịch</a>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <strong id="statAvailable">0</strong>
+              <span>Sản phẩm đang mở bán</span>
+            </div>
+            <div class="stat-card">
+              <strong id="statSold">0</strong>
+              <span>Acc đã bán</span>
+            </div>
+            <div class="stat-card">
+              <strong id="statDone">0</strong>
+              <span>Giao dịch hoàn tất</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="catalog">
+          <div class="panel-head">
+            <div>
+              <h2>Danh mục &amp; Sản phẩm</h2>
+              <p>Chọn danh mục để lọc nhanh và bấm Mua ngay để thanh toán QR tự xét duyệt</p>
+            </div>
+            <span id="cloudBadge" style="font-size:0.78rem;color:var(--muted);">Đang đồng bộ...</span>
+          </div>
+
+          <div class="category-tabs" id="categoryTabs" aria-label="Lọc danh mục sản phẩm" role="tablist"></div>
+          <div class="products-grid" id="productsGrid"></div>
+        </section>
+
+        <section class="panel" id="history">
+          <div class="panel-head">
+            <div>
+              <h2>Lịch sử giao dịch</h2>
+              <p>Ghi nhận các đơn hàng đã chuyển khoản và bàn giao thông tin thành công</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Thời gian</th>
+                  <th>Sản phẩm</th>
+                  <th>Khách / Liên hệ</th>
+                  <th>Số tiền</th>
+                  <th>Nội dung CK</th>
+                  <th>Trạng thái</th>
+                  <th>Thông tin giao</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <aside class="qr-sidebar" id="qr-support">
+        <div class="qr-card">
+          <div class="qr-head">
+            <h2>Thanh toán VietQR</h2>
+            <span>24/7</span>
+          </div>
+
+          <div class="qr-box">
+            <img id="qrImage" alt="Mã QR chuyển khoản VietQR" src="" />
+            <div style="font-size:0.8rem;font-weight:700;" id="qrCaption">Quét mã để chuyển khoản</div>
+          </div>
+
+          <div class="bank-info">
+            <div><span>Chủ tài khoản:</span><strong id="bankOwner">VO NGOC VINH</strong></div>
+            <div><span>STK / SĐT:</span><strong id="bankAccount">0822815249</strong></div>
+            <div><span>Zalo hỗ trợ:</span><strong id="zaloPhone">0366195864</strong></div>
+          </div>
+
+          <div class="steps-box">
+            <strong>Hướng dẫn 3 bước tự xét duyệt:</strong>
+            <ol>
+              <li>Chọn sản phẩm muốn mua và bấm <strong>Mua ngay</strong>.</li>
+              <li>Quét mã QR chuyển đúng số tiền &amp; nội dung đơn.</li>
+              <li>Nhập SĐT/Zalo và bấm xác nhận để nhận tài khoản/file ngay.</li>
+            </ol>
+          </div>
+
+          <div class="qr-actions">
+            <a class="btn btn-primary" href="https://zalo.me/0366195864" target="_blank" rel="noopener">Liên hệ Zalo: 0366195864</a>
+            <button class="btn btn-ghost" type="button" id="copyStkBtn">Sao chép STK: 0822815249</button>
+          </div>
+          <div id="qrStatus" aria-live="polite" role="status" style="font-size:0.82rem;color:#86efac;"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <button class="bot-fab" type="button" id="botToggleBtn" aria-expanded="false">Bot Hỗ Trợ ZENVY</button>
+
+  <aside class="bot-drawer" id="botDrawer" aria-label="Trợ lý ZENVY Bot">
+    <div class="bot-top">
+      <div>
+        <strong>Bot Hỗ Trợ ZENVY</strong>
+        <span>● Trực tuyến — Tư vấn &amp; hỗ trợ 24/7</span>
+      </div>
+      <button type="button" id="botCloseBtn" aria-label="Đóng chat" style="font-size:1.1rem;padding:4px 8px;">✕</button>
+    </div>
+
+    <div class="bot-messages" id="botMessages">
+      <div class="msg bot">Chào bạn! Mình là Bot Hỗ Trợ ZENVY. Bạn cần hỏi về Acc Free Fire, Acc Liên Quân, File / Config hay cách thanh toán QR tự xét duyệt?</div>
+    </div>
+
+    <div class="bot-quick">
+      <button type="button" data-q="Cách mua & nhận acc/file">Cách mua hàng</button>
+      <button type="button" data-q="Thông tin chuyển khoản QR">STK / Zalo</button>
+      <button type="button" data-q="Kiểm tra danh mục sản phẩm">Danh mục</button>
+    </div>
+
+    <form class="bot-form" id="botForm">
+      <input type="text" id="botInput" placeholder="Nhập câu hỏi..." required />
+      <button class="btn btn-primary" type="submit" style="padding:8px 12px;">Gửi</button>
+    </form>
+  </aside>
+
+  <div class="modal-backdrop" id="buyModal" role="dialog" aria-modal="true" aria-labelledby="buyModalTitle">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="buyModalTitle">Thanh toán đơn hàng</h3>
+        <button type="button" data-close="buyModal" style="font-size:1.2rem;padding:4px 8px;">✕</button>
+      </div>
+      <div id="buyModalBody"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="loginModalTitle">Đăng nhập Admin</h3>
+        <button type="button" data-close="loginModal" style="font-size:1.2rem;padding:4px 8px;">✕</button>
+      </div>
+      <form id="loginForm">
+        <div class="form-group" style="margin-bottom:14px;">
+          <label for="adminPassInput">Mật khẩu quản trị</label>
+          <input type="password" id="adminPassInput" placeholder="Nhập mật khẩu Admin..." required />
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:10px;">
+          <button type="button" class="btn btn-ghost" data-close="loginModal">Hủy</button>
+          <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h3 id="adminModalTitle">Quản trị ZENVY STORE</h3>
+        <button type="button" data-close="adminModal" style="font-size:1.2rem;padding:4px 8px;">✕</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button type="button" class="tab-btn active" data-atab="products">Thêm / Quản lý sản phẩm</button>
+        <button type="button" class="tab-btn" data-atab="orders">Quản lý đơn hàng</button>
+        <button type="button" class="tab-btn" data-atab="settings">Cấu hình QR &amp; Mật khẩu</button>
+      </div>
+
+      <div id="adminTabContent"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      doc,
+      setDoc,
+      deleteDoc,
+      onSnapshot,
+      query,
+      orderBy
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDSBg8PtzgEaz6O7t6rDC0mFAPM7X3aI14",
+      authDomain: "zenvyshopp-16d0a.firebaseapp.com",
+      projectId: "zenvyshopp-16d0a",
+      storageBucket: "zenvyshopp-16d0a.firebasestorage.app",
+      messagingSenderId: "718858358160",
+      appId: "1:718858358160:web:f3a820421dba7e6b41b715",
+      measurementId: "G-RHWBFT8CSX"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const CATEGORIES = [
+      "Tất cả",
+      "Acc Free Fire",
+      "Acc Liên Quân",
+      "File / Config",
+      "Genshin Impact"
+    ];
+
+    const STORAGE_KEYS = {
+      products: "zenvy_products_v4",
+      orders: "zenvy_orders_v4",
+      config: "zenvy_config_v4"
+    };
+
+    const DEFAULT_CONFIG = {
+      owner: "VO NGOC VINH",
+      account: "0822815249",
+      zalo: "0366195864",
+      bankBin: "970422",
+      adminPass: "zenvy2026"
+    };
+
+    const SAMPLE_PRODUCTS = [
+      {
+        id: "prod_sample_ff_1",
+        title: "Acc Free Fire Mẫu (Chưa cập nhật acc thật)",
+        category: "Acc Free Fire",
+        price: 150000,
+        imageUrl: "",
+        markSoldOnBuy: true,
+        desc: "Sản phẩm mẫu — vào Admin thêm hình ảnh, sửa tên, giá và thông tin acc trước khi bán thật.",
+        secret: "TK: [chua-cap-nhat-tk] | MK: [chua-cap-nhat-mk]",
+        status: "available",
+        createdAt: 1700000001000
+      },
+      {
+        id: "prod_sample_lq_1",
+        title: "Acc Liên Quân Mẫu (Chưa cập nhật acc thật)",
+        category: "Acc Liên Quân",
+        price: 120000,
+        imageUrl: "",
+        markSoldOnBuy: true,
+        desc: "Sản phẩm mẫu — vào Admin thêm ảnh acc, sửa chi tiết tướng/skin và thông tin bàn giao.",
+        secret: "TK: [chua-cap-nhat-tk] | MK: [chua-cap-nhat-mk]",
+        status: "available",
+        createdAt: 1700000002000
+      },
+      {
+        id: "prod_sample_file_1",
+        title: "File / Config Mẫu (Chưa cập nhật link file)",
+        category: "File / Config",
+        price: 50000,
+        imageUrl: "",
+        markSoldOnBuy: false,
+        desc: "Sản phẩm mẫu bán nhiều lần — vào Admin thêm ảnh minh họa và gắn link tải file.",
+        secret: "Link file: [chua-cap-nhat-link] | Pass giải nén: [chua-cap-nhat]",
+        status: "available",
+        createdAt: 1700000003000
+      }
+    ];
+
+    const SAMPLE_ORDERS = [
+      {
+        id: "ord_sample_1001",
+        code: "ZV100001",
+        time: "20/11/2026 09:15:00",
+        productId: "prod_sample_ff_1",
+        productTitle: "Đơn mẫu — Acc Free Fire",
+        contact: "0900000001",
+        amount: 150000,
+        transferNote: "ZV100001",
+        status: "auto_delivered",
+        deliveryInfo: "TK mẫu: demo_ff | MK mẫu: demo123",
+        createdAt: 1700000004000
+      },
+      {
+        id: "ord_sample_1002",
+        code: "ZV100002",
+        time: "20/11/2026 10:05:00",
+        productId: "prod_sample_file_1",
+        productTitle: "Đơn mẫu — File / Config",
+        contact: "0900000002",
+        amount: 50000,
+        transferNote: "ZV100002",
+        status: "auto_delivered",
+        deliveryInfo: "Link mẫu: https://example.com/file-demo",
+        createdAt: 1700000005000
+      }
+    ];
+
+    let state = {
+      category: "Tất cả",
+      products: [],
+      orders: [],
+      config: { ...DEFAULT_CONFIG },
+      isAdmin: false,
+      activeAdminTab: "products",
+      cloudConnected: false
+    };
+
+    function loadLocalState() {
+      try {
+        const rawP = localStorage.getItem(STORAGE_KEYS.products);
+        const rawO = localStorage.getItem(STORAGE_KEYS.orders);
+        const rawC = localStorage.getItem(STORAGE_KEYS.config);
+
+        const p = rawP !== null ? JSON.parse(rawP) : SAMPLE_PRODUCTS;
+        const o = rawO !== null ? JSON.parse(rawO) : SAMPLE_ORDERS;
+        const c = rawC !== null ? JSON.parse(rawC) : null;
+
+        state.products = Array.isArray(p) ? p : SAMPLE_PRODUCTS;
+        state.orders = Array.isArray(o) ? o : SAMPLE_ORDERS;
+        state.config = { ...DEFAULT_CONFIG, ...(c || {}) };
+      } catch (_) {
+        state.products = [...SAMPLE_PRODUCTS];
+        state.orders = [...SAMPLE_ORDERS];
+        state.config = { ...DEFAULT_CONFIG };
+      }
+    }
+
+    function saveLocalState() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(state.products));
+        localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(state.orders));
+        localStorage.setItem(STORAGE_KEYS.config, JSON.stringify(state.config));
+      } catch (_) {
+        // Nếu ảnh base64 lớn vượt hạn ngạch localStorage thì vẫn giữ trên state và Firestore
+      }
+    }
+
+    function formatMoney(n) {
+      return Number(n || 0).toLocaleString("vi-VN") + "đ";
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function isSafeImageSrc(src) {
+      if (!src || typeof src !== "string") return false;
+      const trimmed = src.trim();
+      return (
+        trimmed.startsWith("https://") ||
+        trimmed.startsWith("http://") ||
+        trimmed.startsWith("data:image/")
+      );
+    }
+
+    function fileToCompressedDataUrl(file, maxWidth = 960, quality = 0.82) {
+      return new Promise((resolve, reject) => {
+        if (!file || !file.type.startsWith("image/")) {
+          reject(new Error("Vui lòng chọn tệp hình ảnh hợp lệ."));
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = new Image();
+          img.onload = () => {
+            const scale = Math.min(1, maxWidth / (img.width || maxWidth));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round((img.width || maxWidth) * scale));
+            canvas.height = Math.max(1, Math.round((img.height || maxWidth) * scale));
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          };
+          img.onerror = () => reject(new Error("Không thể đọc hình ảnh."));
+          img.src = reader.result;
+        };
+        reader.onerror = () => reject(new Error("Lỗi đọc file ảnh."));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function normalizeBankBin(binVal) {
+      const raw = String(binVal || "970422").trim().toUpperCase();
+      if (raw === "MB" || raw === "MBBANK") return "970422";
+      return raw || "970422";
+    }
+
+    function buildQrUrl(amount, content) {
+      const bank = encodeURIComponent(normalizeBankBin(state.config.bankBin));
+      const acc = encodeURIComponent(state.config.account || "0822815249");
+      const name = encodeURIComponent(state.config.owner || "VO NGOC VINH");
+      const addInfo = encodeURIComponent(content || "ZENVY STORE");
+      const amt = amount ? `&amount=${encodeURIComponent(Number(amount))}` : "";
+      return `https://img.vietqr.io/image/${bank}-${acc}-compact2.png?accountName=${name}&addInfo=${addInfo}${amt}`;
+    }
+
+    function buildFallbackQrUrl(amount, content) {
+      const payload = `TK:${state.config.account || "0822815249"}|CTK:${state.config.owner || "VO NGOC VINH"}|ND:${content || "ZENVY STORE"}|ST:${Number(amount || 0)}`;
+      return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(payload)}`;
+    }
+
+    function attachQrFallback(imgEl, amount, content) {
+      if (!imgEl) return;
+      imgEl.onerror = () => {
+        const fallback = buildFallbackQrUrl(amount, content);
+        if (imgEl.src !== fallback) {
+          imgEl.src = fallback;
+        }
+      };
+    }
+
+    function renderAll() {
+      renderStats();
+      renderTabs();
+      renderProducts();
+      renderHistory();
+      renderQrCard();
+      if (state.isAdmin && document.getElementById("adminModal").classList.contains("open")) {
+        renderAdminTab();
+      }
+    }
+
+    function isOrderApproved(o) {
+      return o.status === "approved_delivered" || o.status === "auto_delivered";
+    }
+
+    function renderStats() {
+      const available = state.products.filter(p => (p.status || "available") === "available").length;
+      const sold = state.products.filter(p => p.status === "sold").length;
+      const done = state.orders.filter(isOrderApproved).length;
+
+      document.getElementById("statAvailable").textContent = available;
+      document.getElementById("statSold").textContent = sold;
+      document.getElementById("statDone").textContent = done;
+    }
+
+    function renderTabs() {
+      const tabsEl = document.getElementById("categoryTabs");
+      tabsEl.innerHTML = CATEGORIES.map(cat => `
+        <button
+          type="button"
+          role="tab"
+          aria-selected="${state.category === cat}"
+          class="tab-btn ${state.category === cat ? "active" : ""}"
+          data-cat="${escapeHtml(cat)}"
+        >${escapeHtml(cat)}</button>
+      `).join("");
+
+      tabsEl.querySelectorAll("[data-cat]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.category = btn.getAttribute("data-cat");
+          renderTabs();
+          renderProducts();
+        });
+      });
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("productsGrid");
+      const list = state.products.filter(p => {
+        if ((p.status || "available") !== "available") return false;
+        if (state.category === "Tất cả") return true;
+        return p.category === state.category;
+      });
+
+      if (!list.length) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1 / -1;">
+            Chưa có sản phẩm nào trong danh mục này. Vào <strong>Quản trị Admin</strong> để đăng bán sản phẩm mới.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(p => {
+        const hasImg = isSafeImageSrc(p.imageUrl);
+        return `
+          <article class="product-card">
+            <div>
+              <div class="product-thumb-wrap">
+                ${
+                  hasImg
+                    ? `<img src="${escapeHtml(p.imageUrl)}" alt="${escapeHtml(p.title)}" loading="lazy" />`
+                    : `<div class="product-thumb-placeholder">Chưa có ảnh sản phẩm</div>`
+                }
+              </div>
+              <div class="product-top">
+                <span class="cat-pill">${escapeHtml(p.category || "Sản phẩm")}</span>
+                <span>#${escapeHtml(String(p.id).slice(-6).toUpperCase())}</span>
+              </div>
+              <h3 class="product-title" style="margin-top:10px;">${escapeHtml(p.title)}</h3>
+              <p class="product-desc" style="margin-top:6px;">${escapeHtml(p.desc || "Tự động bàn giao tài khoản hoặc file ngay sau khi xác nhận chuyển khoản.")}</p>
+            </div>
+            <div class="product-foot">
+              <span class="product-price">${formatMoney(p.price)}</span>
+              <button class="btn btn-primary" type="button" data-buy="${escapeHtml(p.id)}">Mua ngay</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      grid.querySelectorAll("[data-buy]").forEach(btn => {
+        btn.addEventListener("click", () => openBuyModal(btn.getAttribute("data-buy")));
+      });
+    }
+
+    function renderHistory() {
+      const tbody = document.getElementById("historyBody");
+      const approvedList = state.orders.filter(isOrderApproved);
+      if (!approvedList.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align:center;color:var(--muted);padding:24px;">
+              Chưa có giao dịch nào được duyệt chuyển tiền &amp; bàn giao.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = approvedList.map(o => `
+        <tr>
+          <td><strong>${escapeHtml(o.code)}</strong></td>
+          <td>${escapeHtml(o.time)}</td>
+          <td>${escapeHtml(o.productTitle)}</td>
+          <td>${escapeHtml(o.contact)}</td>
+          <td><strong>${formatMoney(o.amount)}</strong></td>
+          <td><code>${escapeHtml(o.transferNote)}</code></td>
+          <td><span class="status-ok">Đã duyệt &amp; giao</span></td>
+          <td>${escapeHtml(o.deliveryInfo || "Đã bàn giao")}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderQrCard() {
+      document.getElementById("bankOwner").textContent = state.config.owner || "VO NGOC VINH";
+      document.getElementById("bankAccount").textContent = state.config.account || "0822815249";
+      document.getElementById("zaloPhone").textContent = state.config.zalo || "0366195864";
+      document.getElementById("copyStkBtn").textContent = `Sao chép STK: ${state.config.account || "0822815249"}`;
+      const qrImgEl = document.getElementById("qrImage");
+      attachQrFallback(qrImgEl, 0, "ZENVY STORE");
+      qrImgEl.src = buildQrUrl(0, "ZENVY STORE");
+      document.getElementById("qrCaption").textContent = `MB (${normalizeBankBin(state.config.bankBin)}) • ${state.config.account || "0822815249"}`;
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    document.querySelectorAll("[data-close]").forEach(btn => {
+      btn.addEventListener("click", () => closeModal(btn.getAttribute("data-close")));
+    });
+
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", e => {
+        if (e.target === backdrop) backdrop.classList.remove("open");
+      });
+    });
+
+    function buildAutoDeliveryText(product) {
+      const raw = (product.secret || "").trim();
+      const urlMatch = raw.match(/https?:\/\/[^\s|]+/i);
+      const fileLinkHtml = urlMatch
+        ? `<div style="margin-top:8px;"><a class="btn btn-primary" href="${escapeHtml(urlMatch[0])}" target="_blank" rel="noopener">Tải file / mở link ngay</a></div>`
+        : "";
+      const plainText = raw || "Chưa cấu hình nội dung giao tự động — liên hệ Zalo hỗ trợ để kiểm tra.";
+      return { plainText, fileLinkHtml };
+    }
+
+    function openBuyModal(productId) {
+      const product = state.products.find(p => String(p.id) === String(productId));
+      if (!product) return;
+
+      const orderCode = "ZV" + Math.floor(100000 + Math.random() * 900000);
+      const qrSrc = buildQrUrl(product.price, orderCode);
+      const thumbHtml = isSafeImageSrc(product.imageUrl)
+        ? `<img src="${escapeHtml(product.imageUrl)}" alt="${escapeHtml(product.title)}" style="width:100%;height:120px;object-fit:cover;border-radius:10px;margin-bottom:10px;" />`
+        : "";
+
+      document.getElementById("buyModalTitle").textContent = `Thanh toán — ${product.title}`;
+      document.getElementById("buyModalBody").innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start;">
+          <div class="qr-box">
+            ${thumbHtml}
+            <img src="${qrSrc}" alt="QR thanh toán đơn ${escapeHtml(orderCode)}" />
+            <div style="font-size:0.82rem;font-weight:700;">Số tiền: ${formatMoney(product.price)}</div>
+            <div style="font-size:0.78rem;color:#334155;">Nội dung: <strong>${escapeHtml(orderCode)}</strong></div>
+          </div>
+
+          <form id="confirmOrderForm">
+            <div class="form-group" style="margin-bottom:10px;">
+              <label>Sản phẩm</label>
+              <input type="text" value="${escapeHtml(product.title)}" readonly />
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+              <label>Số tiền chuyển khoản</label>
+              <input type="text" value="${escapeHtml(formatMoney(product.price))}" readonly />
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+              <label>Nội dung chuyển khoản</label>
+              <input type="text" value="${escapeHtml(orderCode)}" readonly />
+            </div>
+            <div class="form-group" style="margin-bottom:14px;">
+              <label for="buyerContact">SĐT / Zalo nhận thông tin *</label>
+              <input type="text" id="buyerContact" placeholder="Nhập SĐT hoặc Zalo của bạn..." required />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Đã chuyển khoản — Tự giao acc / file ngay</button>
+          </form>
+        </div>
+        <div id="deliveredBox" style="margin-top:14px;"></div>
+      `;
+
+      openModal("buyModal");
+
+      document.getElementById("confirmOrderForm").addEventListener("submit", async e => {
+        e.preventDefault();
+        const contact = document.getElementById("buyerContact").value.trim();
+        if (!contact) return;
+
+        const nowStr = new Date().toLocaleString("vi-VN");
+        const newOrder = {
+          id: "ord_" + Date.now(),
+          code: orderCode,
+          time: nowStr,
+          productId: product.id,
+          productTitle: product.title,
+          contact,
+          amount: Number(product.price || 0),
+          transferNote: orderCode,
+          status: "pending_approval",
+          deliveryInfo: "Chờ Admin xét duyệt thanh toán",
+          createdAt: Date.now()
+        };
+
+        state.orders = [newOrder, ...state.orders];
+        saveLocalState();
+        renderAll();
+        await syncOrderAndProduct(newOrder, null);
+
+        document.getElementById("confirmOrderForm").style.display = "none";
+        document.getElementById("deliveredBox").innerHTML = `
+          <div style="background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.45);border-radius:14px;padding:14px;">
+            <strong style="color:#fcd34d;display:block;margin-bottom:6px;">Đã ghi nhận đơn ${escapeHtml(orderCode)} — Đang chờ Admin xét duyệt thanh toán!</strong>
+            <div style="font-size:0.88rem;color:var(--text);line-height:1.5;">
+              Hệ thống <strong>chưa giao acc/file</strong> khi chưa có xác nhận chuyển tiền.<br/>
+              Nội dung CK: <strong>${escapeHtml(orderCode)}</strong> • Số tiền: <strong>${escapeHtml(formatMoney(product.price))}</strong>.<br/>
+              Sau khi Admin kiểm tra đã nhận tiền và bấm duyệt, thông tin acc/file sẽ được mở giao.
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    document.getElementById("openAdminBtn").addEventListener("click", () => {
+      if (state.isAdmin) {
+        openModal("adminModal");
+        renderAdminTab();
+      } else {
+        document.getElementById("adminPassInput").value = "";
+        openModal("loginModal");
+      }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const inputPass = document.getElementById("adminPassInput").value;
+      if (inputPass === state.config.adminPass) {
+        state.isAdmin = true;
+        closeModal("loginModal");
+        openModal("adminModal");
+        renderAdminTab();
+      } else {
+        alert("Mật khẩu quản trị không đúng.");
+      }
+    });
+
+    document.querySelectorAll("[data-atab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-atab]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        state.activeAdminTab = btn.getAttribute("data-atab");
+        renderAdminTab();
+      });
+    });
+
+    function renderAdminTab() {
+      const box = document.getElementById("adminTabContent");
+
+      if (state.activeAdminTab === "products") {
+        let draftImageUrl = "";
+
+        box.innerHTML = `
+          <form id="addProductForm" style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);">
+            <h4 style="margin-bottom:12px;">Thêm sản phẩm mới (kèm hình ảnh)</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="pTitle">Tên sản phẩm *</label>
+                <input type="text" id="pTitle" placeholder="VD: Acc FF VIP Skin Súng..." required />
+              </div>
+              <div class="form-group">
+                <label for="pCategory">Danh mục</label>
+                <select id="pCategory">
+                  <option value="Acc Free Fire">Acc Free Fire</option>
+                  <option value="Acc Liên Quân">Acc Liên Quân</option>
+                  <option value="File / Config">File / Config</option>
+                  <option value="Genshin Impact">Genshin Impact</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="pPrice">Giá bán (VNĐ) *</label>
+                <input type="number" id="pPrice" min="0" step="1000" placeholder="VD: 150000" required />
+              </div>
+              <div class="form-group">
+                <label for="pMarkSold">Chế độ kho</label>
+                <select id="pMarkSold">
+                  <option value="true">Bán 1 lần (tự đánh dấu đã bán sau khi giao acc)</option>
+                  <option value="false">Bán nhiều lần (tự giao file liên tục, giữ mở bán)</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label for="pImageFile">Tải ảnh từ máy lên hoặc dán link ảnh (JPG / PNG / WebP)</label>
+                <input type="file" id="pImageFile" accept="image/*" />
+                <input type="url" id="pImageUrl" placeholder="Hoặc dán link ảnh https://..." style="margin-top:8px;" />
+                <div class="img-preview-box" id="pImagePreviewBox">
+                  <span style="font-size:0.8rem;color:var(--muted);">Chưa chọn ảnh xem trước</span>
+                </div>
+              </div>
+              <div class="form-group full">
+                <label for="pDesc">Mô tả ngắn</label>
+                <input type="text" id="pDesc" placeholder="Chi tiết rank, tướng/skin, hoặc hướng dẫn file..." />
+              </div>
+              <div class="form-group full">
+                <label for="pAttachFile">Đính kèm file từ máy (tùy chọn — tạo link tải ngay khi duyệt đơn)</label>
+                <input type="file" id="pAttachFile" />
+                <input type="url" id="pFileUrl" placeholder="Hoặc dán link tải file trực tiếp https://..." style="margin-top:8px;" />
+                <div id="pFileMeta" style="font-size:0.8rem;color:var(--muted);margin-top:6px;">Chưa đính kèm file</div>
+              </div>
+              <div class="form-group full">
+                <label for="pSecret">Nội dung tự giao khi khách chuyển khoản (TK/MK, Link tải file hoặc ghi chú giao hàng) *</label>
+                <textarea id="pSecret" rows="2" placeholder="VD: TK: abc@gmail.com | MK: 123456 hoặc https://link-file..." required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng bán sản phẩm</button>
+          </form>
+
+          <h4 style="margin-bottom:10px;">Danh sách sản phẩm (${state.products.length})</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ảnh</th>
+                  <th>Tên</th>
+                  <th>Danh mục</th>
+                  <th>Giá</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${state.products.map(p => `
+                  <tr>
+                    <td>
+                      ${
+                        isSafeImageSrc(p.imageUrl)
+                          ? `<img class="mini-thumb" src="${escapeHtml(p.imageUrl)}" alt="${escapeHtml(p.title)}" />`
+                          : `<span style="font-size:0.75rem;color:var(--muted);">Không có</span>`
+                      }
+                    </td>
+                    <td><strong>${escapeHtml(p.title)}</strong></td>
+                    <td>${escapeHtml(p.category)}</td>
+                    <td>${formatMoney(p.price)}</td>
+                    <td>${(p.status || "available") === "available" ? '<span class="status-ok">Đang bán</span>' : "Đã bán"}</td>
+                    <td style="display:flex;gap:6px;flex-wrap:wrap;">
+                      <button type="button" class="btn btn-ghost" style="padding:6px 10px;font-size:0.78rem;" data-edit-img="${escapeHtml(p.id)}">Sửa ảnh</button>
+                      <button type="button" class="btn btn-ghost" style="padding:6px 10px;font-size:0.78rem;" data-toggle-prod="${escapeHtml(p.id)}">
+                        ${(p.status || "available") === "available" ? "Đánh dấu đã bán" : "Mở bán lại"}
+                      </button>
+                      <button type="button" class="btn btn-danger" style="padding:6px 10px;font-size:0.78rem;" data-del-prod="${escapeHtml(p.id)}">Xóa</button>
+                    </td>
+                  </tr>
+                `).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--muted);">Chưa có sản phẩm</td></tr>`}
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        const previewBox = document.getElementById("pImagePreviewBox");
+        const urlInput = document.getElementById("pImageUrl");
+        const fileInput = document.getElementById("pImageFile");
+        const attachFileInput = document.getElementById("pAttachFile");
+        const fileUrlInput = document.getElementById("pFileUrl");
+        const fileMetaEl = document.getElementById("pFileMeta");
+        const secretInput = document.getElementById("pSecret");
+        let attachedFileBlobUrl = "";
+
+        attachFileInput.addEventListener("change", () => {
+          const f = attachFileInput.files?.[0];
+          if (!f) {
+            attachedFileBlobUrl = "";
+            fileMetaEl.textContent = "Chưa đính kèm file";
+            return;
+          }
+          if (attachedFileBlobUrl) {
+            URL.revokeObjectURL(attachedFileBlobUrl);
+          }
+          attachedFileBlobUrl = URL.createObjectURL(f);
+          const kb = Math.max(1, Math.round(f.size / 1024));
+          fileMetaEl.textContent = `Đã chọn: ${f.name} (${kb} KB) — link tải tạm trên phiên này: ${attachedFileBlobUrl}`;
+          if (!secretInput.value.trim()) {
+            secretInput.value = `File: ${f.name} | Link tải: ${attachedFileBlobUrl}`;
+          } else if (!secretInput.value.includes(attachedFileBlobUrl)) {
+            secretInput.value = `${secretInput.value.trim()} | Link file: ${attachedFileBlobUrl}`;
+          }
+        });
+
+        fileUrlInput.addEventListener("input", () => {
+          const link = fileUrlInput.value.trim();
+          if (!link) return;
+          if (!secretInput.value.trim()) {
+            secretInput.value = `Link tải file: ${link}`;
+          } else if (!secretInput.value.includes(link)) {
+            secretInput.value = `${secretInput.value.trim()} | Link file: ${link}`;
+          }
+        });
+
+        function updateDraftPreview(src) {
+          draftImageUrl = isSafeImageSrc(src) ? src.trim() : "";
+          if (draftImageUrl) {
+            previewBox.innerHTML = `
+              <img src="${escapeHtml(draftImageUrl)}" alt="Xem trước ảnh sản phẩm" />
+              <button type="button" class="btn btn-ghost" id="clearDraftImgBtn" style="padding:6px 10px;font-size:0.78rem;">Gỡ ảnh</button>
+            `;
+            document.getElementById("clearDraftImgBtn").addEventListener("click", () => {
+              draftImageUrl = "";
+              urlInput.value = "";
+              fileInput.value = "";
+              updateDraftPreview("");
+            });
+          } else {
+            previewBox.innerHTML = `<span style="font-size:0.8rem;color:var(--muted);">Chưa chọn ảnh xem trước</span>`;
+          }
+        }
+
+        urlInput.addEventListener("input", () => updateDraftPreview(urlInput.value));
+        fileInput.addEventListener("change", async () => {
+          const file = fileInput.files?.[0];
+          if (!file) return;
+          try {
+            const compressed = await fileToCompressedDataUrl(file);
+            urlInput.value = "";
+            updateDraftPreview(compressed);
+          } catch (err) {
+            alert(err.message || "Không thể xử lý ảnh.");
+          }
+        });
+
+        document.getElementById("addProductForm").addEventListener("submit", async e => {
+          e.preventDefault();
+          const finalImg = draftImageUrl || (isSafeImageSrc(urlInput.value) ? urlInput.value.trim() : "");
+          const prod = {
+            id: "prod_" + Date.now(),
+            title: document.getElementById("pTitle").value.trim(),
+            category: document.getElementById("pCategory").value,
+            price: Number(document.getElementById("pPrice").value || 0),
+            imageUrl: finalImg,
+            markSoldOnBuy: document.getElementById("pMarkSold").value === "true",
+            desc: document.getElementById("pDesc").value.trim(),
+            secret: document.getElementById("pSecret").value.trim(),
+            status: "available",
+            createdAt: Date.now()
+          };
+          state.products = [prod, ...state.products];
+          saveLocalState();
+          renderAll();
+          await upsertProductCloud(prod);
+          renderAdminTab();
+        });
+
+        box.querySelectorAll("[data-edit-img]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-edit-img");
+            const target = state.products.find(x => String(x.id) === String(id));
+            if (!target) return;
+
+            const picker = document.createElement("input");
+            picker.type = "file";
+            picker.accept = "image/*";
+            picker.onchange = async () => {
+              const f = picker.files?.[0];
+              if (!f) return;
+              try {
+                target.imageUrl = await fileToCompressedDataUrl(f);
+                saveLocalState();
+                renderAll();
+                await upsertProductCloud(target);
+                renderAdminTab();
+              } catch (err) {
+                alert(err.message || "Lỗi cập nhật ảnh.");
+              }
+            };
+            picker.click();
+          });
+        });
+
+        box.querySelectorAll("[data-toggle-prod]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-toggle-prod");
+            const target = state.products.find(x => String(x.id) === String(id));
+            if (!target) return;
+            target.status = (target.status || "available") === "available" ? "sold" : "available";
+            saveLocalState();
+            renderAll();
+            await upsertProductCloud(target);
+            renderAdminTab();
+          });
+        });
+
+        box.querySelectorAll("[data-del-prod]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-del-prod");
+            state.products = state.products.filter(x => String(x.id) !== String(id));
+            saveLocalState();
+            renderAll();
+            await deleteProductCloud(id);
+            renderAdminTab();
+          });
+        });
+      }
+
+      if (state.activeAdminTab === "orders") {
+        const pendingCount = state.orders.filter(o => !isOrderApproved(o) && o.status !== "rejected").length;
+        const approvedCount = state.orders.filter(isOrderApproved).length;
+
+        box.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+            <div style="font-size:0.86rem;color:var(--muted);">
+              Đang chờ xác nhận tiền: <strong style="color:#fcd34d;">${pendingCount}</strong> • Đã duyệt &amp; giao: <strong style="color:#86efac;">${approvedCount}</strong>
+            </div>
+            <input type="text" id="orderSearchInput" placeholder="Tìm mã đơn ZV..., SĐT, nội dung CK..." style="max-width:270px;padding:8px 12px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);font-size:0.84rem;" />
+          </div>
+          <div id="adminOrderNotice" style="font-size:0.84rem;color:#86efac;margin-bottom:10px;"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Sản phẩm</th>
+                  <th>Khách / CK</th>
+                  <th>Số tiền</th>
+                  <th>Trạng thái duyệt</th>
+                  <th>Thông tin giao</th>
+                  <th>Duyệt thủ công</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTbody"></tbody>
+            </table>
+          </div>
+        `;
+
+        function renderOrdersRows(filterText = "") {
+          const kw = filterText.trim().toLowerCase();
+          const filtered = state.orders.filter(o => {
+            if (!kw) return true;
+            return (
+              String(o.code || "").toLowerCase().includes(kw) ||
+              String(o.contact || "").toLowerCase().includes(kw) ||
+              String(o.transferNote || "").toLowerCase().includes(kw) ||
+              String(o.productTitle || "").toLowerCase().includes(kw)
+            );
+          });
+
+          const tbodyEl = document.getElementById("adminOrdersTbody");
+          tbodyEl.innerHTML = filtered.map(o => {
+            const approved = isOrderApproved(o);
+            const rejected = o.status === "rejected";
+            const badgeHtml = approved
+              ? `<span class="status-ok">Đã duyệt &amp; giao</span>`
+              : rejected
+                ? `<span style="display:inline-block;padding:3px 9px;border-radius:999px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.16);color:#fca5a5;">Đã từ chối</span>`
+                : `<span style="display:inline-block;padding:3px 9px;border-radius:999px;font-size:0.75rem;font-weight:700;background:rgba(245,158,11,0.18);color:#fcd34d;">Chờ duyệt CK</span>`;
+
+            return `
+              <tr>
+                <td><strong>${escapeHtml(o.code)}</strong></td>
+                <td>${escapeHtml(o.productTitle)}</td>
+                <td>${escapeHtml(o.contact)}<br/><code style="font-size:0.75rem;">CK: ${escapeHtml(o.transferNote || o.code)}</code></td>
+                <td>${formatMoney(o.amount)}</td>
+                <td>${badgeHtml}</td>
+                <td>${approved ? escapeHtml(o.deliveryInfo || "") : `<span style="color:var(--muted);">Chưa giao (chờ xác nhận tiền)</span>`}</td>
+                <td style="display:flex;gap:6px;flex-wrap:wrap;">
+                  ${
+                    !approved
+                      ? `<button type="button" class="btn btn-primary" style="padding:6px 10px;font-size:0.78rem;" data-approve-ord="${escapeHtml(o.id)}">Duyệt đã nhận tiền &amp; Giao</button>`
+                      : ""
+                  }
+                  ${
+                    !approved && !rejected
+                      ? `<button type="button" class="btn btn-ghost" style="padding:6px 10px;font-size:0.78rem;" data-reject-ord="${escapeHtml(o.id)}">Chưa nhận tiền</button>`
+                      : ""
+                  }
+                  <button type="button" class="btn btn-danger" style="padding:6px 10px;font-size:0.78rem;" data-del-ord="${escapeHtml(o.id)}">Xóa</button>
+                </td>
+              </tr>
+            `;
+          }).join("") || `<tr><td colspan="7" style="text-align:center;color:var(--muted);">Không có đơn hàng phù hợp</td></tr>`;
+
+          tbodyEl.querySelectorAll("[data-approve-ord]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+              const id = btn.getAttribute("data-approve-ord");
+              const ord = state.orders.find(x => String(x.id) === String(id));
+              if (!ord) return;
+
+              const prod = state.products.find(p => String(p.id) === String(ord.productId));
+              const secretText = prod
+                ? buildAutoDeliveryText(prod).plainText
+                : (ord.deliveryInfo && ord.deliveryInfo !== "Chờ Admin xét duyệt thanh toán"
+                  ? ord.deliveryInfo
+                  : "Đã xác nhận thanh toán — kiểm tra lại sản phẩm để cập nhật thông tin giao.");
+
+              ord.status = "approved_delivered";
+              ord.deliveryInfo = secretText;
+
+              let updatedProd = null;
+              if (prod && prod.markSoldOnBuy !== false) {
+                prod.status = "sold";
+                updatedProd = prod;
+              }
+
+              saveLocalState();
+              renderAll();
+              await syncOrderAndProduct(ord, updatedProd);
+              renderAdminTab();
+              const notice = document.getElementById("adminOrderNotice");
+              if (notice) notice.textContent = `Đã duyệt đơn ${ord.code} và bàn giao thông tin thành công.`;
+            });
+          });
+
+          tbodyEl.querySelectorAll("[data-reject-ord]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+              const id = btn.getAttribute("data-reject-ord");
+              const ord = state.orders.find(x => String(x.id) === String(id));
+              if (!ord) return;
+              ord.status = "rejected";
+              ord.deliveryInfo = "Chưa nhận được chuyển khoản";
+              saveLocalState();
+              renderAll();
+              await syncOrderAndProduct(ord, null);
+              renderAdminTab();
+            });
+          });
+
+          tbodyEl.querySelectorAll("[data-del-ord]").forEach(btn => {
+            btn.addEventListener("click", async () => {
+              const id = btn.getAttribute("data-del-ord");
+              state.orders = state.orders.filter(x => String(x.id) !== String(id));
+              saveLocalState();
+              renderAll();
+              await deleteOrderCloud(id);
+              renderAdminTab();
+            });
+          });
+        }
+
+        renderOrdersRows("");
+        document.getElementById("orderSearchInput").addEventListener("input", e => {
+          renderOrdersRows(e.target.value);
+        });
+      }
+
+        box.querySelectorAll("[data-approve-ord]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-approve-ord");
+            const ord = state.orders.find(x => String(x.id) === String(id));
+            if (!ord) return;
+
+            const prod = state.products.find(p => String(p.id) === String(ord.productId));
+            const secretText = prod
+              ? buildAutoDeliveryText(prod).plainText
+              : (ord.deliveryInfo && ord.deliveryInfo !== "Chờ Admin xét duyệt thanh toán"
+                ? ord.deliveryInfo
+                : "Đã xác nhận thanh toán — kiểm tra lại sản phẩm để cập nhật thông tin giao.");
+
+            ord.status = "approved_delivered";
+            ord.deliveryInfo = secretText;
+
+            let updatedProd = null;
+            if (prod && prod.markSoldOnBuy !== false) {
+              prod.status = "sold";
+              updatedProd = prod;
+            }
+
+            saveLocalState();
+            renderAll();
+            await syncOrderAndProduct(ord, updatedProd);
+            renderAdminTab();
+          });
+        });
+
+        box.querySelectorAll("[data-reject-ord]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-reject-ord");
+            const ord = state.orders.find(x => String(x.id) === String(id));
+            if (!ord) return;
+            ord.status = "rejected";
+            ord.deliveryInfo = "Chưa nhận được chuyển khoản";
+            saveLocalState();
+            renderAll();
+            await syncOrderAndProduct(ord, null);
+            renderAdminTab();
+          });
+        });
+
+        box.querySelectorAll("[data-del-ord]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-del-ord");
+            state.orders = state.orders.filter(x => String(x.id) !== String(id));
+            saveLocalState();
+            renderAll();
+            await deleteOrderCloud(id);
+            renderAdminTab();
+          });
+        });
+      }
+
+      if (state.activeAdminTab === "settings") {
+        box.innerHTML = `
+          <form id="settingsForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="cfgOwner">Chủ tài khoản</label>
+                <input type="text" id="cfgOwner" value="${escapeHtml(state.config.owner)}" required />
+              </div>
+              <div class="form-group">
+                <label for="cfgAccount">STK / SĐT nhận tiền</label>
+                <input type="text" id="cfgAccount" value="${escapeHtml(state.config.account)}" required />
+              </div>
+              <div class="form-group">
+                <label for="cfgBank">Ngân hàng QR (mã BIN/tên VietQR)</label>
+                <input type="text" id="cfgBank" value="${escapeHtml(state.config.bankBin)}" required />
+              </div>
+              <div class="form-group">
+                <label for="cfgZalo">Zalo hỗ trợ</label>
+                <input type="text" id="cfgZalo" value="${escapeHtml(state.config.zalo)}" required />
+              </div>
+              <div class="form-group full">
+                <label for="cfgPass">Mật khẩu Admin</label>
+                <input type="text" id="cfgPass" value="${escapeHtml(state.config.adminPass)}" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Lưu cấu hình</button>
+          </form>
+        `;
+
+        document.getElementById("settingsForm").addEventListener("submit", async e => {
+          e.preventDefault();
+          state.config = {
+            owner: document.getElementById("cfgOwner").value.trim(),
+            account: document.getElementById("cfgAccount").value.trim(),
+            bankBin: document.getElementById("cfgBank").value.trim(),
+            zalo: document.getElementById("cfgZalo").value.trim(),
+            adminPass: document.getElementById("cfgPass").value
+          };
+          saveLocalState();
+          renderAll();
+          await upsertConfigCloud(state.config);
+          alert("Đã lưu cấu hình.");
+        });
+      }
+    }
+
+    document.getElementById("copyStkBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(state.config.account || "0822815249");
+        document.getElementById("qrStatus").textContent = "Đã sao chép STK thành công.";
+      } catch (_) {
+        document.getElementById("qrStatus").textContent = `STK: ${state.config.account || "0822815249"}`;
+      }
+    });
+
+    const botDrawer = document.getElementById("botDrawer");
+    const botToggleBtn = document.getElementById("botToggleBtn");
+    const botMessages = document.getElementById("botMessages");
+
+    function toggleBot(forceOpen) {
+      const next = typeof forceOpen === "boolean" ? forceOpen : !botDrawer.classList.contains("open");
+      botDrawer.classList.toggle("open", next);
+      botToggleBtn.setAttribute("aria-expanded", String(next));
+    }
+
+    botToggleBtn.addEventListener("click", () => toggleBot());
+    document.getElementById("botCloseBtn").addEventListener("click", () => toggleBot(false));
+
+    function replyBot(question) {
+      const q = question.toLowerCase();
+      if (q.includes("mua") || q.includes("nhận") || q.includes("thanh toán")) {
+        return "Bạn chọn sản phẩm → bấm Mua ngay → quét QR chuyển đúng số tiền & mã đơn → gửi thông tin. Sau khi Admin kiểm tra đã nhận tiền và duyệt đơn thì hệ thống mới bàn giao acc/file.";
+      }
+      if (q.includes("stk") || q.includes("qr") || q.includes("zalo")) {
+        return `Chủ TK: ${state.config.owner}
+STK/SĐT: ${state.config.account}
+Zalo hỗ trợ: ${state.config.zalo}`;
+      }
+      if (q.includes("danh mục") || q.includes("acc") || q.includes("file")) {
+        return "Shop có các danh mục: Acc Free Fire, Acc Liên Quân, File / Config và Genshin Impact.";
+      }
+      return `Bạn có thể liên hệ trực tiếp Zalo ${state.config.zalo} để được hỗ trợ nhanh nhất nhé!`;
+    }
+
+    document.querySelectorAll(".bot-quick button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const text = btn.getAttribute("data-q");
+        botMessages.innerHTML += `<div class="msg user">${escapeHtml(text)}</div>`;
+        botMessages.innerHTML += `<div class="msg bot">${escapeHtml(replyBot(text))}</div>`;
+        botMessages.scrollTop = botMessages.scrollHeight;
+      });
+    });
+
+    document.getElementById("botForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("botInput");
+      const text = input.value.trim();
+      if (!text) return;
+      botMessages.innerHTML += `<div class="msg user">${escapeHtml(text)}</div>`;
+      botMessages.innerHTML += `<div class="msg bot">${escapeHtml(replyBot(text))}</div>`;
+      botMessages.scrollTop = botMessages.scrollHeight;
+      input.value = "";
+    });
+
+    function showSyncNotice(msg, isError = false) {
+      const badge = document.getElementById("cloudBadge");
+      if (!badge) return;
+      badge.textContent = msg;
+      badge.style.color = isError ? "#fca5a5" : "#86efac";
+    }
+
+    async function upsertProductCloud(prod) {
+      try {
+        await setDoc(doc(db, "products", String(prod.id)), prod);
+        showSyncNotice("Đã lưu sản phẩm lên Firestore");
+      } catch (err) {
+        console.error("upsertProductCloud error:", err);
+        showSyncNotice("Lỗi lưu Firestore (kiểm tra Rules)", true);
+      }
+    }
+
+    async function deleteProductCloud(id) {
+      try {
+        await deleteDoc(doc(db, "products", String(id)));
+        showSyncNotice("Đã xóa sản phẩm trên Firestore");
+      } catch (err) {
+        console.error("deleteProductCloud error:", err);
+        showSyncNotice("Lỗi xóa trên Firestore (kiểm tra Rules)", true);
+      }
+    }
+
+    async function syncOrderAndProduct(order, updatedProd) {
+      try {
+        await setDoc(doc(db, "orders", String(order.id)), order);
+        if (updatedProd) await setDoc(doc(db, "products", String(updatedProd.id)), updatedProd);
+        showSyncNotice("Đã lưu đơn hàng lên Firestore");
+      } catch (err) {
+        console.error("syncOrderAndProduct error:", err);
+        showSyncNotice("Lỗi lưu đơn lên Firestore (kiểm tra Rules)", true);
+      }
+    }
+
+    async function deleteOrderCloud(id) {
+      try {
+        await deleteDoc(doc(db, "orders", String(id)));
+        showSyncNotice("Đã xóa đơn trên Firestore");
+      } catch (err) {
+        console.error("deleteOrderCloud error:", err);
+        showSyncNotice("Lỗi xóa đơn trên Firestore", true);
+      }
+    }
+
+    async function upsertConfigCloud(cfg) {
+      try {
+        await setDoc(doc(db, "settings", "store_config"), cfg);
+        showSyncNotice("Đã lưu cấu hình lên Firestore");
+      } catch (err) {
+        console.error("upsertConfigCloud error:", err);
+        showSyncNotice("Lỗi lưu cấu hình Firestore", true);
+      }
+    }
+
+    function initCloudSync() {
+      const badge = document.getElementById("cloudBadge");
+      try {
+        onSnapshot(query(collection(db, "products"), orderBy("createdAt", "desc")), snap => {
+          state.cloudConnected = true;
+          badge.textContent = "Firebase Firestore: Đã kết nối";
+          badge.style.color = "#86efac";
+          state.products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          saveLocalState();
+          renderAll();
+        }, (err) => {
+          badge.textContent = "Lỗi kết nối Firestore (kiểm tra Rules)";
+          badge.style.color = "#fca5a5";
+          console.error("Firestore products error:", err);
+        });
+
+        onSnapshot(query(collection(db, "orders"), orderBy("createdAt", "desc")), snap => {
+          state.cloudConnected = true;
+          const cloudOrders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          // Giữ lại các đơn vừa tạo local chưa kịp xuất hiện trong snapshot nếu chưa có lỗi ghi
+          const localOnly = state.orders.filter(
+            o => String(o.id).startsWith("ord_") && !String(o.id).startsWith("ord_sample_") && !cloudOrders.some(c => String(c.id) === String(o.id))
+          );
+          state.orders = [...localOnly, ...cloudOrders].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+          saveLocalState();
+          renderAll();
+        }, (err) => {
+          console.error("Firestore orders error:", err);
+          showSyncNotice("Lỗi đọc đơn hàng từ Firestore", true);
+        });
+
+        onSnapshot(doc(db, "settings", "store_config"), snap => {
+          if (snap.exists()) {
+            state.config = { ...DEFAULT_CONFIG, ...snap.data() };
+            saveLocalState();
+            renderAll();
+          }
+        }, () => {});
+      } catch (_) {
+        badge.textContent = "Chế độ lưu trình duyệt";
+      }
+    }
+
+    loadLocalState();
+    renderAll();
+    initCloudSync();
+  </script>
+</body>
+</html>
